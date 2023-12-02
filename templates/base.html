@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Web App{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>{% block header %}My Web App{% endblock %}</h1>
+    </header>
+    <nav>
+        <ul>
+            {% for app in applications %}
+                <li><a href="{{ url_for(app.route) }}">{{ app.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </nav>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

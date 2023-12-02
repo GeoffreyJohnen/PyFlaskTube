@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}YouTube Downloader{% endblock %}
+{% block header %}YouTube Downloader{% endblock %}
+
+{% block content %}
+    <h2>YouTube Downloader</h2>
+    <form method="post" action="{{ url_for('youtube_downloader') }}">
+        <label for="youtube_url">Enter YouTube URL:</label>
+        <input type="text" id="youtube_url" name="youtube_url" required>
+        <button type="submit">Get Available Streams</button>
+    </form>
+
+    {% if streams %}
+    <h3>Available Streams:</h3>
+    <form method="post" action="{{ url_for('youtube_downloader') }}">
+        <input type="hidden" name="youtube_url" value="{{ youtube_url }}">
+        {% for stream in streams %}
+            <label>
+                <input type="radio" name="selected_stream" value="{{ loop.index }}" required>
+                {{ stream.resolution }}
+            </label><br>
+        {% endfor %}
+        <br>
+        <button type="submit" name="download">Download Selected Stream</button>
+    </form>
+{% elif error_message %}
+    <p>{{ error_message }}</p>
+{% endif %}
+
+{% endblock %}

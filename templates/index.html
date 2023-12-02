@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Table of Contents{% endblock %}
+{% block header %}Table of Contents{% endblock %}
+
+{% block content %}
+    <h2>Applications:</h2>
+    <ul>
+        {% for app in applications %}
+            <li><a href="{{ url_for(app.route) }}">{{ app.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
